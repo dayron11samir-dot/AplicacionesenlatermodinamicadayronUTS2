@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termodinámica - Conceptos Fundamentales</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #66eab1 0%, #4ba276 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: #66ea6d;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background: white;
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section h2 {
+            color: #73ea66;
+            margin-bottom: 15px;
+            font-size: 2em;
+            border-bottom: 3px solid #66ea7a;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #4b89a2;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .concepto {
+            background: #f5f5f5;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #66d4ea;
+            border-radius: 5px;
+        }
+
+        .formula {
+            background: #f0f0f0;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border: 2px solid #4b93a2;
+        }
+
+        .leyes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .ley {
+            background: linear-gradient(135deg, #68ea66 0%, #4b8ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .ley:hover {
+            transform: translateY(-5px);
+        }
+
+        .ley h4 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .calculadora {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .calculadora input {
+            padding: 10px;
+            margin: 5px;
+            border: 2px solid #66a6ea;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .calculadora button {
+            padding: 10px 20px;
+            background: #66b3ea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+
+        .calculadora button:hover {
+            background: #4ba292;
+        }
+
+        .resultado {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e8f4f8;
+            border-radius: 5px;
+            border-left: 4px solid #66ea92;
+            display: none;
+        }
+
+        .resultado.activo {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🔥 Termodinámica</h1>
+        <p>Conceptos Fundamentales y Leyes</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#concepto">Concepto</a></li>
+            <li><a href="#leyes">Leyes</a></li>
+            <li><a href="#variables">Variables</a></li>
+            <li><a href="#calc">Calculadora</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Sección Concepto -->
+        <section id="concepto" class="section">
+            <h2>¿Qué es la Termodinámica?</h2>
+            <p>La termodinámica es la rama de la física que estudia las relaciones entre el calor, la energía, el trabajo y las propiedades de los sistemas físicos. Se encarga de analizar cómo la energía se transforma y se transfiere en los diferentes procesos.</p>
+            <p>Añadiendo La termodinámica hace parte a la rama de la física mediante esta se busca explicar la energía y transferencia de calor, con un enfoque en el trabajo que esta presenta en el sistema de forma química, físico, abarcando tanto aspectos físicos y químicos en procesos energéticos, analizado de una manera detallada como cambian de fase, procesos de combustión e interacciones moleculares, permitiendo entender de manera macroscópica, propiedades observables y medibles del sistema en su conjunto como volumen que es el espacio ocupado por dicha sustancia, temperatura movimiento de partículas y capacidad de transferir energía, presión que indica la fuerza ejercida por unidad de área sobre las paredes del contenido.</p>
+
+            <div class="concepto">
+                <strong>Definición:</strong> La termodinámica trata de la energía, sus transformaciones y cómo estas transformaciones afectan a la materia y a los sistemas.
+            </div>
+
+            <h3>Importancia</h3>
+            <p>La termodinámica es fundamental en:</p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>Ingeniería Mecánica (motores, turbinas)</li>
+                <li>Ingeniería Química (procesos químicos)</li>
+                <li>Ingeniería de Sistemas (refrigeración, calefacción)</li>
+                <li>Energías renovables</li>
+            </ul>
+        </section>
+
+        <!-- Sección Leyes -->
+        <section id="leyes" class="section">
+            <h2>Las Cuatro Leyes de la Termodinámica</h2>
+            
+            <div class="leyes">
+                <div class="ley">
+                    <h4>Ley Cero</h4>
+                    <p>Si dos sistemas están en equilibrio térmico con un tercero, entonces están en equilibrio térmico entre sí.</p>
+                </div>
+
+                <div class="ley">
+                    <h4>Primera Ley</h4>
+                    <p>La energía no se crea ni se destruye, solo se transforma. ΔU = Q - W</p>
+                </div>
+
+                <div class="ley">
+                    <h4>Segunda Ley</h4>
+                    <p>La entropía de un sistema aislado siempre aumenta. El calor no fluye espontáneamente de cuerpos fríos a calientes.</p>
+                </div>
+
+                <div class="ley">
+                    <h4>Tercera Ley</h4>
+                    <p>Es imposible alcanzar el cero absoluto. La entropía de un cristal perfecto a 0 K es cero.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Variables -->
+        <section id="variables" class="section">
+            <h2>Variables Termodinámicas Principales</h2>
+            
+            <div class="concepto">
+                <strong>Temperatura (T):</strong> Medida del nivel de energía térmica de un sistema. Unidades: K, °C, °F
+            </div>
+
+            <div class="concepto">
+                <strong>Presión (P):</strong> Fuerza ejercida por unidad de área. Unidades: Pa, atm, bar, psi
+            </div>
+
+            <div class="concepto">
+                <strong>Volumen (V):</strong> Espacio ocupado por una sustancia. Unidades: m³, L, cm³
+            </div>
+
+            <div class="concepto">
+                <strong>Entalpía (H):</strong> Cantidad de energía en un sistema a presión constante. H = U + PV
+            </div>
+
+            <div class="concepto">
+                <strong>Entropía (S):</strong> Medida del desorden o aleatoriedad en un sistema.
+            </div>
+
+            <h3>Ecuaciones Importantes</h3>
+            <div class="formula">
+                Primera Ley: ΔU = Q - W<br>
+                Donde: U=energía interna, Q=calor, W=trabajo
+            </div>
+
+            <div class="formula">
+                Entalpía: H = U + PV
+            </div>
+
+            <div class="formula">
+                Entropía: ΔS = Q/T (proceso reversible)
+            </div>
+        </section>
+
+        <!-- Calculadora -->
+        <section id="calc" class="section">
+            <h2>Calculadora Termodinámica</h2>
+            
+            <div class="calculadora">
+                <h3>Conversión de Temperatura</h3>
+                <input type="number" id="celsius" placeholder="Ingresa °C" value="0">
+                <button onclick="convertirTemperatura()">Convertir</button>
+                
+                <div id="resultadoTemp" class="resultado">
+                    <p><strong>Celsius:</strong> <span id="celsiusResult">0</span> °C</p>
+                    <p><strong>Fahrenheit:</strong> <span id="fahrenheitResult">32</span> °F</p>
+                    <p><strong>Kelvin:</strong> <span id="kelvinResult">273.15</span> K</p>
+                </div>
+            </div>
+
+            <div class="calculadora">
+                <h3>Cálculo de Trabajo Termodinámico</h3>
+                <input type="number" id="presion" placeholder="Presión (Pa)" value="100000">
+                <input type="number" id="volumen" placeholder="Volumen (m³)" value="1">
+                <button onclick="calcularTrabajo()">Calcular</button>
+                
+                <div id="resultadoTrabajo" class="resultado">
+                    <p><strong>Trabajo (W):</strong> <span id="trabajoResult">100000</span> J</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Página sobre Termodinámica | Conceptos Fundamentales</p>
+    </footer>
+
+    <script>
+        function convertirTemperatura() {
+            const celsius = parseFloat(document.getElementById('celsius').value) || 0;
+            const fahrenheit = (celsius * 9/5) + 32;
+            const kelvin = celsius + 273.15;
+
+            document.getElementById('celsiusResult').textContent = celsius.toFixed(2);
+            document.getElementById('fahrenheitResult').textContent = fahrenheit.toFixed(2);
+            document.getElementById('kelvinResult').textContent = kelvin.toFixed(2);
+            
+            document.getElementById('resultadoTemp').classList.add('activo');
+        }
+
+        function calcularTrabajo() {
+            const presion = parseFloat(document.getElementById('presion').value) || 0;
+            const volumen = parseFloat(document.getElementById('volumen').value) || 0;
+            const trabajo = presion * volumen;
+
+            document.getElementById('trabajoResult').textContent = trabajo.toFixed(2);
+            document.getElementById('resultadoTrabajo').classList.add('activo');
+        }
+
+        // Smooth scroll para los links de navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
